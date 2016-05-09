@@ -13,13 +13,13 @@ class graph{
 		string m_name;
 		int m_weight;
 		int m_maxNeighs;
-		graph *neighbors;
+		graph **neighbors;
 	public:
 		graph(){
 			m_name="";
-			m_weight=NULL;
-			m_maxNeighs=0;
-		}
+			m_weight=-1;
+			m_maxNeighs=-1;
+			}
 		
 		void makeNeighbors(const int m);
 		void setName(string name);

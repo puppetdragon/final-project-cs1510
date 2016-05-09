@@ -18,7 +18,7 @@ int main()
 	cout<<"how many cases will there be?: "<<endl;
 	cin>>testcases;
 	
-	for(int k=testcases; k > 0; k--)
+	for(int k=0; k < testcases; k++)
 	{
 		
 		cout<<endl;
@@ -31,10 +31,8 @@ int main()
 		cout<<"how many places are in this city?"<<endl;
 		cin>>amount_City;
 		
-		for(int j=amount_City; j > 0; j--)
-		{
-			A.makeNeighbors(amount_City);
-		}
+		A.makeNeighbors(amount_City);
+		
 	}
 	
 
