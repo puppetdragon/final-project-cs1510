@@ -7,12 +7,6 @@
 
 class graph 
 {	
-/*
-graph to have:
-name
-size
-how many nodes it'll hold
-*/
 	private:
 		string m_name;
 		int m_size;
@@ -29,12 +23,7 @@ how many nodes it'll hold
 		void makeGraph(); 
 		string getName(){return m_name;}
 		int getSize(){return m_size;}
-		bool travel(int token);
-		~graph(){
-			delete nodes;
-		}
+		bool travel(int token,int vertex, int edge);
+	
 };
-
-
-
 #endif

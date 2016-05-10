@@ -10,8 +10,9 @@ class vertex
 		string m_name;
 		int m_degree;
 		edge *m_edges;
+
 	public:
-		vertex(){}
+	vertex(){}
 				
 		void initEdges(int neighbors,string name){
 			m_name = name;
@@ -22,10 +23,15 @@ class vertex
 		void makeEdge();
 		string getName(){return m_name;}
 		int getDegree(){return m_degree;}
-		~vertex(){
-			delete m_edges;
-		}
-
+		
+		string getEdgeName(int index){
+			return m_edges[index].getName();
+		};
+		
+		int getEdgeWeight(int index){
+			return m_edges[index].getWeight();
+		};
+	
 };
 
 #endif

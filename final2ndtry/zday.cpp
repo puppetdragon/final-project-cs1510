@@ -10,6 +10,7 @@ int main(){
 	string current_Loc;		//	current location
 	int start_T;			//	amount of tokens at the start
 	int amount_City;		//	Amount of Citys
+	bool tester;
 	/**programs start**/
 	
 	cout<<endl;
@@ -34,7 +35,12 @@ int main(){
 		A.makeGraph();
 		
 		cout<< "In "<<current_Loc<<", Dr.Zoidberg can reach: "<<endl;
-		A.travel(start_T);
+		tester=A.travel(start_T,0,0);
+		if(tester==false)
+		{
+			cout<<"nothing :-("<<endl;
+		}
+		
 		
 	}
 	return 0;

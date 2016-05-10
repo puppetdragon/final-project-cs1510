@@ -41,11 +41,53 @@ void vertex:: makeEdge()
 	return;
 }
 
-bool graph::travel(int token){
+bool graph::travel(int token, int vertex, int edge){
+	
+	if(token <= 0)
+		return false;
+	/*else if (token - nodes[vertex]->edge[edge].getWeight()> 0)
+	{
+		if(edge < nodes[vertex].getDegree()-1)
+		{		
+			cout<<nodes[vertex]->edge[edge].getName()<<endl;
+			travel(token - nodes[vertex]->edge[edge].getWeight(),vertex, edge+1);
+		}
+		else if(vertex < getSize()-1)
+		{
+			cout<<nodes[vertex]->edge[edge].getName()<<endl;
+			travel(token - nodes[vertex]->edge[edge].getWeight(),vertex+1, edge);
+		}
+	}*/
+	
+	else if (token - nodes[vertex].getEdgeWeight(edge)> 0)
+	{
+		if(edge < nodes[vertex].getDegree()-1)
+		{		
+			cout<<nodes[vertex].getEdgeName(edge)<<endl;
+			travel(token - nodes[vertex].getEdgeWeight(edge),vertex, edge+1);
+		}
+		else if(vertex < getSize()-1)
+		{
+			cout<<nodes[vertex].getEdgeName(edge)<<endl;
+			travel(token - nodes[vertex].getEdgeWeight(edge),vertex+1, edge);
+		}
+		return true;
+	}
+	/*
+	http://web.cecs.pdx.edu/~sheard/course/Cs163/Graphics/graph1.png, going to 3, went upwards
+	1. look at neighbors,5
+	2. go to first neighbor, at 5
+	3. Check weight of neighbor, can go? if not check other neighbor
+	4. check neighbor, go to 4
+	5. go to neighbor, at 4
+	6. check weight, can go to 4? if not go back and check other neighbor
+	7. Check neighbor, go to 6
+	8. go to neighbor,at 6
+	9. check weigh, can go? If not check neighbor
+	10. 
+	*/
 	
 	
-	cout<< this->nodes[0].m_edges[0].getName();
 	return false;
-	
 }
 
