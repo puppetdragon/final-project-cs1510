@@ -11,6 +11,21 @@ class vertex
 		int m_degree;
 		edge *m_edges;
 	public:
+		vertex(){}
+				
+		void initEdges(int neighbors,string name){
+			m_name = name;
+			m_degree = neighbors;
+			m_edges = new edge[neighbors];
+		}
+		
+		void makeEdge();
+		string getName(){return m_name;}
+		int getDegree(){return m_degree;}
+		~vertex(){
+			delete m_edges;
+		}
+
 };
 
 #endif

@@ -12,7 +12,13 @@ class edge
 		string m_name;
 		int m_weight;
 	public:
-	
+		edge(){}
+		void createEdge(string name, int weight){
+			m_name=name;
+			m_weight=weight;
+		}
+		string getName(){return m_name;}
+		int getWeight(){return m_weight;}
 };
 
 #endif
