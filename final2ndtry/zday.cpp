@@ -10,10 +10,19 @@ int main(){
 	string current_Loc;		//	current location
 	int start_T;			//	amount of tokens at the start
 	int amount_City;		//	Amount of Citys
-	bool tester;
-	/**programs start**/
 	
-	cout<<endl;
+	/**programs start**/
+
+/*	string *stuff= new string[5];
+
+	storeName(stuff, 5, "hitasd");
+	
+	storeName(stuff, 5, "nasdaw");
+	for(int i= 0; i < 5; i++)
+	{
+		cout<<stuff[i]<<endl;
+	}
+	*/
 	cout<<endl;
 	cout<<"how many cases will there be?: "<<endl;
 	cin>>testcases;
@@ -32,14 +41,9 @@ int main(){
 		cin>>amount_City;
 		
 		graph A(current_Loc, amount_City);
-		A.makeGraph();
+		A.makeGraph(current_Loc, start_T);
 		
-		cout<< "In "<<current_Loc<<", Dr.Zoidberg can reach: "<<endl;
-		tester=A.travel(start_T,0,0);
-		if(tester==false)
-		{
-			cout<<"nothing :-("<<endl;
-		}
+		
 		
 		
 	}

@@ -4,10 +4,11 @@
 
 using namespace std;
 
-void graph:: makeGraph()
+void graph:: makeGraph(string current, int start_T)
 {
 	string name;
 	int vertices;
+	bool tester;
 	
 	for(int k = 0; k < getSize(); k++)
 	{
@@ -20,6 +21,12 @@ void graph:: makeGraph()
 		this->nodes[k].initEdges(vertices,name);
 		this->nodes[k].makeEdge();
 	}
+		cout<< "In "<<current<<", Dr.Zoidberg can reach: "<<endl;
+		tester=travel(start_T,nodes[0].getName());
+		if(tester==false)
+		{
+			cout<<"nothing :-("<<endl;
+		}
 	
 	return;
 }
@@ -41,53 +48,67 @@ void vertex:: makeEdge()
 	return;
 }
 
-bool graph::travel(int token, int vertex, int edge){
+bool ifStored(string array[], int size, string name)
+{
+	for(int k = 0; k < size; k++)
+	{
+		if(array[k]==name)
+			return true;
+	}
+	return false;
+}
+void storeName(string array[], int size, string name)
+{
+	if(ifStored(array,size,name)==false)
+	{
+		for(int k = 0; k < size; k++)
+		{
+			if(array[k].empty()==true)
+			{
+				array[k]=name;
+				k = size;
+			}
+		}
+	}
+}
+
+bool graph::travel(int token, string vertex){
 	
-	if(token <= 0)
+	string *name=new string[getSize()-1];
+	bool solve;
+	if(token < 0)
 		return false;
-	/*else if (token - nodes[vertex]->edge[edge].getWeight()> 0)
-	{
-		if(edge < nodes[vertex].getDegree()-1)
-		{		
-			cout<<nodes[vertex]->edge[edge].getName()<<endl;
-			travel(token - nodes[vertex]->edge[edge].getWeight(),vertex, edge+1);
-		}
-		else if(vertex < getSize()-1)
-		{
-			cout<<nodes[vertex]->edge[edge].getName()<<endl;
-			travel(token - nodes[vertex]->edge[edge].getWeight(),vertex+1, edge);
-		}
-	}*/
 	
-	else if (token - nodes[vertex].getEdgeWeight(edge)> 0)
+	else 
 	{
-		if(edge < nodes[vertex].getDegree()-1)
-		{		
-			cout<<nodes[vertex].getEdgeName(edge)<<endl;
-			travel(token - nodes[vertex].getEdgeWeight(edge),vertex, edge+1);
-		}
-		else if(vertex < getSize()-1)
+		for(int k = 0; k < getSize(); k++)
 		{
-			cout<<nodes[vertex].getEdgeName(edge)<<endl;
-			travel(token - nodes[vertex].getEdgeWeight(edge),vertex+1, edge);
+			if(nodes[k].getName()==vertex)
+			{			
+				for(int j=0; j < nodes[k].getDegree(); j++)
+				{
+					if(token - nodes[k].getEdgeWeight(j) >= 0)
+					{
+						storeName(name,getSize()-1,nodes[k].getEdgeName(j));
+						solve=travel(token - nodes[k].getEdgeWeight(j),nodes[k].getEdgeName(j));
+						if(solve)
+						{
+							for(int i = 0; i < getSize()-1; i++)
+							{
+								if(name[i].empty()==false)
+								{
+									cout<<"at name["<<i<<"]=";
+									cout<<name[i]<<endl;
+								}
+							}
+						}
+					}
+				}	
+			}
+			//cout<<"current k val: "<<k<<" name of node at k: "<<nodes[k].getName()<<" name of vertex: "<<vertex<<endl;
 		}
 		return true;
 	}
-	/*
-	http://web.cecs.pdx.edu/~sheard/course/Cs163/Graphics/graph1.png, going to 3, went upwards
-	1. look at neighbors,5
-	2. go to first neighbor, at 5
-	3. Check weight of neighbor, can go? if not check other neighbor
-	4. check neighbor, go to 4
-	5. go to neighbor, at 4
-	6. check weight, can go to 4? if not go back and check other neighbor
-	7. Check neighbor, go to 6
-	8. go to neighbor,at 6
-	9. check weigh, can go? If not check neighbor
-	10. 
-	*/
 	
-	
-	return false;
 }
 

@@ -20,10 +20,13 @@ class graph
 			nodes= new vertex[m_size];
 			
 		}
-		void makeGraph(); 
+		void makeGraph(string current,int start_T); 
 		string getName(){return m_name;}
 		int getSize(){return m_size;}
-		bool travel(int token,int vertex, int edge);
+		bool travel(int token,string vertex);
 	
 };
+
+bool ifStored(string array[], int size, string name);
+void storeName(string array[], int size, string name);
 #endif
