@@ -20,10 +20,15 @@ class graph
 			nodes= new vertex[m_size];
 			
 		}
-		void makeGraph(string current,int start_T); 
+		void makeGraph(string current,int start_T, int places); 
 		string getName(){return m_name;}
 		int getSize(){return m_size;}
-		bool travel(int token,string vertex);
+		bool travel(int token, string vertex, string arrayPlace[]);
+		~graph(){
+			if(m_size > 0){
+				delete [] nodes;
+			}
+		}
 	
 };
 

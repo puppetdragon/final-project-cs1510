@@ -4,30 +4,37 @@
 
 using namespace std;
 
-void graph:: makeGraph(string current, int start_T)
+void graph:: makeGraph(string current, int start_T, int places)
 {
 	string name;
 	int vertices;
 	bool tester;
-	
+	string *placeNames= new string [places-1];
 	for(int k = 0; k < getSize(); k++)
 	{
-		cout<<"What is your current location?: "<<endl;
 		cin>>name;
-		
-		cout<<"How many neighbors does it have?: "<<endl;
+
 		cin>>vertices;
 		
 		this->nodes[k].initEdges(vertices,name);
 		this->nodes[k].makeEdge();
 	}
 		cout<< "In "<<current<<", Dr.Zoidberg can reach: "<<endl;
-		tester=travel(start_T,nodes[0].getName());
+		
+		tester=travel(start_T,nodes[0].getName(), placeNames);
 		if(tester==false)
 		{
 			cout<<"nothing :-("<<endl;
 		}
-	
+		else
+		{
+			for(int k = 0; k < places-1 ; k++)
+			{
+				if(placeNames[k].empty()==false)
+				cout<<placeNames[k]<<endl;
+			}
+		}
+	delete [] placeNames;
 	return;
 }
 
@@ -38,11 +45,8 @@ void vertex:: makeEdge()
 	
 	for(int k = 0; k < getDegree(); k++)
 	{
-		cout<<"What is the name of the place that you can travel to?: "<<endl;
 		cin>>placeName;
-		cout<<"How many tokens does it cost to get there?: "<<endl;
 		cin>>weight;
-		cout<<endl;
 		this->m_edges[k].createEdge(placeName, weight);
 	}
 	return;
@@ -59,6 +63,7 @@ bool ifStored(string array[], int size, string name)
 }
 void storeName(string array[], int size, string name)
 {
+	
 	if(ifStored(array,size,name)==false)
 	{
 		for(int k = 0; k < size; k++)
@@ -72,14 +77,14 @@ void storeName(string array[], int size, string name)
 	}
 }
 
-bool graph::travel(int token, string vertex){
+bool graph::travel(int token, string vertex, string arrayPlace[]){
 	
-	string *name=new string[getSize()-1];
 	bool solve;
 	if(token < 0)
+	{
 		return false;
-	
-	else 
+	}
+	else if(token >= 0)
 	{
 		for(int k = 0; k < getSize(); k++)
 		{
@@ -87,28 +92,19 @@ bool graph::travel(int token, string vertex){
 			{			
 				for(int j=0; j < nodes[k].getDegree(); j++)
 				{
+					solve=travel(token - nodes[k].getEdgeWeight(j),nodes[k].getEdgeName(j),arrayPlace);
 					if(token - nodes[k].getEdgeWeight(j) >= 0)
 					{
-						storeName(name,getSize()-1,nodes[k].getEdgeName(j));
-						solve=travel(token - nodes[k].getEdgeWeight(j),nodes[k].getEdgeName(j));
-						if(solve)
-						{
-							for(int i = 0; i < getSize()-1; i++)
-							{
-								if(name[i].empty()==false)
-								{
-									cout<<"at name["<<i<<"]=";
-									cout<<name[i]<<endl;
-								}
-							}
-						}
+						storeName(arrayPlace,getSize()-1,nodes[k].getEdgeName(j));
+					}
+					else if (solve == false)
+					{
+						return false;
 					}
 				}	
 			}
-			//cout<<"current k val: "<<k<<" name of node at k: "<<nodes[k].getName()<<" name of vertex: "<<vertex<<endl;
 		}
 		return true;
 	}
-	
 }
 

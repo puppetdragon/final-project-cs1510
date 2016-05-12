@@ -31,6 +31,9 @@ class vertex
 		int getEdgeWeight(int index){
 			return m_edges[index].getWeight();
 		};
+		~vertex(){
+			delete [] m_edges;
+		}
 	
 };
 

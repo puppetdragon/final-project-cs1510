@@ -19,6 +19,7 @@ class edge
 		}
 		string getName(){return m_name;}
 		int getWeight(){return m_weight;}
+		
 };
 
 #endif
